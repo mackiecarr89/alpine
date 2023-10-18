@@ -34,13 +34,18 @@ export default defineTheme({
       backgroundColor: {
         initial: '#330045',
         dark: '#330045'
+      },
+
+      color: {
+        initial: '#efb0ff',
+        dark: '#efb0ff'
       }
     },
 
     backdrop: {
       backgroundColor: {
-        initial: '#330045',
-        dark: '#330045'
+        initial: '#efb0ff',
+        dark: '#efb0ff'
       }
     }
   }
