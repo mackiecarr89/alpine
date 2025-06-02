@@ -50,7 +50,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 8
+          version: latest # Use the latest version of pnpm
 
       - uses: actions/setup-node@v3
         with:
@@ -58,7 +58,15 @@ jobs:
           cache: ${{ steps.pkgman.outputs.cache }}
 
       - name: Install dependencies
-        run: ${{ steps.pkgman.outputs.package_manager }} install
+        run: |
+          if ["${{ steps.pkgman.outputs.package_manager }}" == "pnpm" ]; then
+            pnpm install --force
+          else
+            ${{ steps.pkgman.outputs.package_manager }} install
+          fi
+        env:
+          NPM_REGISTRY: https://registry.npmjs.org # Specify registry URL explicitly for reliability
+
 
       - name: Install @nuxthq/studio
         run: ${{ steps.pkgman.outputs.package_manager }} add -D @nuxthq/studio
